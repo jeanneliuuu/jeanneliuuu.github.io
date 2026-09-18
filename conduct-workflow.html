@@ -10,7 +10,7 @@
 <x-dc>
 
 <helmet>
-<link rel="icon" type="image/gif" href="assets/favicon.gif">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='52' font-size='72' text-anchor='middle' dominant-baseline='central'%3E%F0%9F%8D%80%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
@@ -581,14 +581,14 @@
     <div style="{{ moreWorkStyle }}">
       <span style="{{ eyebrowStyle }}">More work</span>
       <div style="{{ moreWorkGridStyle }}">
-        <a href="case-study-mfa.html" style="{{ moreWorkCardStyle }}">
+        <a href="mfa.html" style="{{ moreWorkCardStyle }}">
           <div style="{{ moreWorkThumbStyle }}">
-            <video src="assets/mfa-cover-v5.mp4" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="metadata" style="{{ moreWorkMediaStyle }}" style-hover="transform:scale(1.18);" ref="{{ forcePlayVideoRef }}"></video>
+            <video src="assets/mfa-cover-v5.mp4" poster="assets/mfa-cover-still.webp" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="auto" ref="{{ forcePlayVideoRef }}" style="{{ moreWorkMediaStyle }}" style-hover="transform:scale(1.18);"></video>
           </div>
           <div style="{{ moreWorkPillStyle }}">iObservation · 2026</div>
           <h3 style="{{ moreWorkTitleStyle }}">Building a cohesive authentication experience from enrollment to recovery <span style="{{ moreWorkArrowStyle }}">↗</span></h3>
         </a>
-        <a href="case-study-sustainabli.html" style="{{ moreWorkCardStyle }}">
+        <a href="sashimi.html" style="{{ moreWorkCardStyle }}">
           <div style="{{ moreWorkThumbStyle }}">
             <img src="assets/sustainabli-cover.png" alt="Sustainabli dashboard" style="{{ moreWorkImgStyle }}" style-hover="transform:scale(0.94);">
           </div>
