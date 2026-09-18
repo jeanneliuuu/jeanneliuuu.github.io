@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="./image-slot.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="icon" type="image/gif" href="assets/favicon.gif">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Helvetica Neue LT Pro'; src: url('assets/fonts/HelveticaNeueLTPro-Lt.otf') format('opentype'); font-weight: 300; font-style: normal; }
+  body { margin: 0; }
+  a { text-decoration: none; }
+  @keyframes conductScrollForm {
+    0%, 2% { background-position: 50% 0%; }
+    48%, 56% { background-position: 50% 100%; }
+    98%, 100% { background-position: 50% 0%; }
+  }
+</style>
+<link rel="preload" as="image" href="assets/observation-form-outdated-2.png">
+<link rel="preload" as="image" href="assets/observation-form-outdated.png">
+<link rel="preload" as="image" href="assets/observation-form-warning-review.png">
+<link rel="preload" as="image" href="assets/observation-form-scroll-2.png">
+</helmet>
+<div style="{{ pageStyle }}">
+  <nav style="{{ navOuterStyle }}">
+    <div style="{{ navPillStyle }}">
+      <a href="index.html" style="{{ tabStyle }}">Work</a>
+      <a href="index.html#about" style="{{ tabStyle }}">About</a>
+      <a href="https://drive.google.com/file/d/1Jps6GoFgM5kaYd6eAURk7kdNmi-vTBkW/view?usp=sharing" target="_blank" rel="noopener" style="{{ tabStyle }}">Resume</a>
+      <div style="{{ dividerStyle }}"></div>
+      <button onClick="{{ toggleDark }}" style="{{ themeBtnStyle }}" aria-label="Toggle dark mode">
+        <sc-if value="{{ darkMode }}">
+          <svg width="15" height="15" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+            <path d="M12.023 1.76021V1M12.023 23.0461V22.2859M22.2859 12.023H23.0461M1 12.023H1.76021M19.2806 4.76622L19.8182 4.22867M4.22787 19.8175L4.76542 19.2799M19.2806 19.2799L19.8182 19.8174M4.22787 4.22861L4.76542 4.76616M18.0899 11.9815C18.0899 15.3403 15.367 18.0632 12.0082 18.0632C8.64938 18.0632 5.92652 15.3403 5.92652 11.9815C5.92652 8.62265 8.64938 5.89979 12.0082 5.89979C15.367 5.89979 18.0899 8.62265 18.0899 11.9815Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </sc-if>
+        <sc-if value="{{ notDarkMode }}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+            <path d="M21.6001 14.6396C20.6978 14.9132 19.7405 15.0603 18.7488 15.0603C13.3308 15.0603 8.93868 10.6682 8.93868 5.25018C8.93868 4.25896 9.08569 3.30208 9.35909 2.40015C5.33166 3.62153 2.40015 7.36319 2.40015 11.7895C2.40015 17.2075 6.7923 21.5997 12.2103 21.5997C16.6371 21.5997 20.379 18.6676 21.6001 14.6396Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+          </svg>
+        </sc-if>
+      </button>
+    </div>
+  </nav>
+
+  <main style="{{ mainOuterStyle }}">
+    <aside style="{{ sidebarStyle }}">
+      <a href="index.html" style="{{ backLinkStyle }}">← Back to work</a>
+      <div style="{{ contentsLabelStyle }}">Contents</div>
+      <nav style="{{ sidebarNavStyle }}">
+        <a href="#tldr" onClick="{{ jumpTo.tldr }}" style="{{ linkStyleFor.tldr }}">TL;DR</a>
+        <a href="#background" onClick="{{ jumpTo.background }}" style="{{ linkStyleFor.background }}">Context</a>
+        <a href="#problem" onClick="{{ jumpTo.problem }}" style="{{ linkStyleFor.problem }}">Problem</a>
+        <a href="#process" onClick="{{ jumpTo.process }}" style="{{ linkStyleFor.process }}">Process</a>
+        <a href="#final" onClick="{{ jumpTo.final }}" style="{{ linkStyleFor.final }}">Final Designs</a>
+        <a href="#results" onClick="{{ jumpTo.results }}" style="{{ linkStyleFor.results }}">Impact</a>
+        <a href="#reflections" onClick="{{ jumpTo.reflections }}" style="{{ linkStyleFor.reflections }}">Reflections</a>
+      </nav>
+    </aside>
+
+    <article style="{{ articleStyle }}">
+
+    <div style="{{ heroFrameStyle }}">
+      <img src="assets/conduct-hero-cover-sm.png" alt="iObservation evaluation form in a MacBook Pro" style="width:100%;height:100%;object-fit:contain;display:block;">
+    </div>
+
+    <h1 style="{{ titleWrapStyle }}"><sc-for list="{{ titleWords }}" as="w" hint-placeholder-count="4"><span style="{{ w.style }}">{{ w.text }}</span></sc-for></h1>
+
+    <div style="{{ tagRowStyle }}">
+      <span style="{{ tagStyle }}">📦 Shipped</span>
+      <span style="{{ tagStyle }}">Workflow Redesign</span>
+      <span style="{{ tagStyle }}">EdTech</span>
+      <span style="{{ tagStyle }}">UX Strategy</span>
+    </div>
+
+    <div id="tldr" style="{{ heroGridStyle }}">
+      <div>
+        <div style="{{ eyebrowStyle }}">TL;DR</div>
+        <p style="{{ tldrTextStyle }}">Conduct is a core workflow for classroom walkthroughs and evaluations, used by principals and administrators to document observations and by teachers to review feedback. I restructured the legacy experience around how users actually navigate and complete the workflow, replacing a dense, scroll-heavy form with clearer information architecture, progressive disclosure, and more efficient navigation.</p>
+      </div>
+      <div style="{{ metaColStyle }}">
+        <div>
+          <div style="{{ metaLabelStyle }}">Role</div>
+          <div style="{{ metaValueStyle }}">Product Designer</div>
+        </div>
+        <div>
+          <div style="{{ metaLabelStyle }}">Timeline</div>
+          <div style="{{ metaValueStyle }}">Q3 2025 – Q1 2026</div>
+        </div>
+        <div>
+          <div style="{{ metaLabelStyle }}">Team</div>
+          <div style="{{ metaValueStyle }}">1 designer, 4 engineers, 1 PM</div>
+        </div>
+        <div>
+          <div style="{{ metaLabelStyle }}">Platform</div>
+          <div style="{{ metaValueStyle }}">Web</div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <section id="background" style="{{ sectionStyle }}">
+      <div style="{{ sectionEyebrowStyle }}">Context</div>
+      <h2 style="{{ h2Style }}">A workflow that had outgrown its interface</h2>
+      <p style="{{ backgroundIntroStyle }}">Conduct is used daily by teachers, administrators, and principals to support classroom walkthroughs and observations. As new requirements were introduced over time, the experience became increasingly difficult to navigate and complete.</p>
+      <p style="{{ backgroundIntroStyle }}; margin-top:16px;">Observers had to work through long, dense pages, often scrolling through sections to find the information they needed. I redesigned the Conduct workflow to create a clearer structure, improve navigation, and make routine tasks more efficient.</p>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section id="problem" style="{{ sectionStyle }}">
+      <div style="{{ sectionEyebrowStyle }}">Problem</div>
+      <h2 style="{{ h2Style }}">Complexity had outpaced the experience</h2>
+      <p style="{{ pStyle }}">I conducted a design audit and observed how users worked through Conduct during classroom visits. As the Conduct flow became more complex, the interface did not evolve with user needs. It accumulated more information without providing the structure and guidance users needed to complete tasks efficiently.</p>
+      <p style="{{ pStyle }}; margin-top:16px;">Users had to navigate around the interface before they could focus on the task itself. Information was difficult to scan, relevant sections were buried, and there was no efficient way to move between them.</p>
+
+      <div style="{{ problemPreviewStyle }}">
+        <sc-if value="{{ isProblem1 }}" hint-placeholder-val="{{ true }}">
+          <div style="{{ problemCropStyle.p1 }}"></div>
+        </sc-if>
+        <sc-if value="{{ isProblem2 }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ problemCropStyle.p2 }}"></div>
+        </sc-if>
+        <sc-if value="{{ isProblem3 }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ problemCropStyle.p3 }}"></div>
+          <span style="{{ problemCaptionOverlayStyle }}">no sense of progress through the form</span>
+        </sc-if>
+        <sc-if value="{{ isProblem4 }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ problemCropStyle.p4 }}"></div>
+        </sc-if>
+      </div>
+      <div style="{{ problemHintStyle }}">hover to explore</div>
+
+      <div style="{{ numberedListStyle }}">
+        <div style="{{ numberedItemStyle.p1 }}" onMouseEnter="{{ setProblemHover.p1 }}" onMouseLeave="{{ clearProblemHover }}" onClick="{{ setProblemActive.p1 }}">
+          <div style="{{ numberedHeaderRowStyle }}">
+            <span style="{{ numberBadgeStyle.p1 }}">1</span>
+            <div style="{{ numberedTitleStyle }}">Outdated UI</div>
+          </div>
+          <div style="{{ numberedTextStyle }}">Dense forms and unclear structure made it difficult for users to identify required fields, completed sections, and next steps.</div>
+        </div>
+        <div style="{{ numberedItemStyle.p2 }}" onMouseEnter="{{ setProblemHover.p2 }}" onMouseLeave="{{ clearProblemHover }}" onClick="{{ setProblemActive.p2 }}">
+          <div style="{{ numberedHeaderRowStyle }}">
+            <span style="{{ numberBadgeStyle.p2 }}">2</span>
+            <div style="{{ numberedTitleStyle }}">Inflexible Forms</div>
+          </div>
+          <div style="{{ numberedTextStyle }}">The experience lacked flexibility, forcing users through unnecessary fields and sections instead of adapting to their specific needs.</div>
+        </div>
+        <div style="{{ numberedItemStyle.p3 }}" onMouseEnter="{{ setProblemHover.p3 }}" onMouseLeave="{{ clearProblemHover }}" onClick="{{ setProblemActive.p3 }}">
+          <div style="{{ numberedHeaderRowStyle }}">
+            <span style="{{ numberBadgeStyle.p3 }}">3</span>
+            <div style="{{ numberedTitleStyle }}">Cognitive Overload</div>
+          </div>
+          <div style="{{ numberedTextStyle }}">Dense forms and unclear structure made it difficult for users to identify required fields, completed sections, and next steps.</div>
+        </div>
+        <div style="{{ numberedItemStyle.p4 }}" onMouseEnter="{{ setProblemHover.p4 }}" onMouseLeave="{{ clearProblemHover }}" onClick="{{ setProblemActive.p4 }}">
+          <div style="{{ numberedHeaderRowStyle }}">
+            <span style="{{ numberBadgeStyle.p4 }}">4</span>
+            <div style="{{ numberedTitleStyle }}">Limited Validation Feedback</div>
+          </div>
+          <div style="{{ numberedTextStyle }}">Errors lacked visibility and direction. Inline validation surfaced problems only at the field level.</div>
+        </div>
+      </div>
+      
+
+      <div style="{{ userPatternsLabelStyle }}">Understanding users</div>
+      <div style="{{ userPatternsCardStyle }}">
+        <div style="{{ userPatternRowStyle }}">
+          <div style="{{ userPatternIconStyle }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          </div>
+          <div style="{{ userPatternBodyStyle }}">
+            <div style="{{ userPatternHeaderRowStyle }}">
+              <span style="{{ userPatternNameStyle }}">Observers</span>
+              <span style="{{ userPatternBadgeStyle.observers }}">Principals &amp; admins</span>
+            </div>
+            <div style="{{ pStyle }}">Needed to efficiently document a classroom visit, give relevant feedback, and capture what's needed for follow-up.</div>
+          </div>
+        </div>
+        <div style="{{ userPatternDividerStyle }}"></div>
+        <div style="{{ userPatternRowStyle }}">
+          <div style="{{ userPatternIconStyle }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          </div>
+          <div style="{{ userPatternBodyStyle }}">
+            <div style="{{ userPatternHeaderRowStyle }}">
+              <span style="{{ userPatternNameStyle }}">Learners</span>
+              <span style="{{ userPatternBadgeStyle.learners }}">Teachers</span>
+            </div>
+            <div style="{{ pStyle }}">Needed to easily review feedback from a visit, understand what happened, and get to the context behind it.</div>
+          </div>
+        </div>
+      </div>
+      <p style="{{ pStyle }}; margin-top:20px;">Across both roles, the opportunity was to make information easier to capture, navigate, and understand.</p>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section id="process" style="{{ sectionStyle }}">
+      <div style="{{ sectionEyebrowStyle }}">Process</div>
+      <h2 style="{{ h2Style }}">From audit to validation</h2>
+
+      <div style="{{ processStepRevealStyle.s1 }}" ref="{{ revealRef.s1 }}">
+        <div style="{{ processNumStyle }}">01</div>
+        <div>
+          <h3 style="{{ h3Style }}">Restructuring the Conduct workflow</h3>
+          <p style="{{ pStyle }}">The legacy experience treated Conduct as one continuous form. Information was presented sequentially, requiring observers to scroll through sections, even when fields or content weren't relevant to their workflow.</p>
+          <p style="{{ pStyle }}; margin-top:16px;">I restructured the experience around distinct sections and introduced persistent navigation, giving observers a clear view of the workflow and a faster way to move between relevant areas.</p>
+
+          <div style="{{ hierarchyCardStyle }}">
+            <div style="{{ hierarchyMockStyle }}">
+              <div style="{{ hierarchyMockBlockStyle.context }}">
+                <div style="{{ hierarchyMockFilledBoxStyle }}"></div>
+              </div>
+              <div style="{{ hierarchyMockBlockStyle.rubric }}; display:flex; flex-direction:column; gap:10px;">
+                <div style="{{ hierarchyMockRatingRowStyle }}">
+                  <div style="{{ hierarchyMockLineShortStyle }}; margin-bottom:0;"></div>
+                  <div style="{{ hierarchyMockDotsRowStyle }}">
+                    <div style="{{ hierarchyMockDotStyle.d1 }}"></div>
+                    <div style="{{ hierarchyMockDotStyle.d2 }}"></div>
+                    <div style="{{ hierarchyMockDotStyle.d3 }}"></div>
+                    <div style="{{ hierarchyMockDotStyle.d4 }}"></div>
+                  </div>
+                </div>
+                <div style="{{ hierarchyMockRatingRowStyle }}">
+                  <div style="{{ hierarchyMockLineShortStyle }}; margin-bottom:0;"></div>
+                  <div style="{{ hierarchyMockDotsRowStyle }}">
+                    <div style="{{ hierarchyMockDotStyle.d1 }}"></div>
+                    <div style="{{ hierarchyMockDotStyle.d2 }}"></div>
+                    <div style="{{ hierarchyMockDotStyle.d3 }}"></div>
+                    <div style="{{ hierarchyMockDotStyle.d4 }}"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="{{ hierarchyMockBlockStyle.notes }}">
+                <div style="{{ hierarchyMockSmallBoxStyle }}; margin-bottom:6px;"></div>
+                <div style="{{ hierarchyMockSmallBoxStyle }}; margin-bottom:6px;"></div>
+                <div style="{{ hierarchyMockSmallBoxStyle }}; margin-bottom:0;"></div>
+              </div>
+            </div>
+            <div style="{{ hierarchyListStyle }}">
+              <div style="{{ hierarchyItemStyle.context }}" onMouseEnter="{{ setHierarchyActive.context }}">
+                <div style="{{ hierarchyLabelStyle.context }}">Context</div>
+                <div style="{{ hierarchyDescStyle }}">Location, learner, and visit details, set before the observation starts.</div>
+              </div>
+              <div style="{{ hierarchyItemStyle.rubric }}" onMouseEnter="{{ setHierarchyActive.rubric }}">
+                <div style="{{ hierarchyLabelStyle.rubric }}">Evidence &amp; scale</div>
+                <div style="{{ hierarchyDescStyle }}">Evidence uploaded and rated against a fixed scale, organized into focused, reviewable sections.</div>
+              </div>
+              <div style="{{ hierarchyItemStyle.notes }}" onMouseEnter="{{ setHierarchyActive.notes }}">
+                <div style="{{ hierarchyLabelStyle.notes }}">Summary &amp; sign-off</div>
+                <div style="{{ hierarchyDescStyle }}">Final comments, acknowledgments, and notifications once the observation is complete.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div style="{{ processStepRevealStyle.s2 }}" ref="{{ revealRef.s2 }}">
+        <div style="{{ processNumStyle }}">02</div>
+        <div style="min-width:0;flex:1;">
+          <h3 style="{{ h3Style }}">Making complex information easier to scan</h3>
+          <p style="{{ pStyle }}">The original experience presented all content at once, making it difficult to distinguish what was relevant or required. I introduced hierarchy and progressive disclosure so sections collapse by default and expand on demand, giving observers a clear overview while letting them focus on what they need.</p>
+          <div style="{{ rubricDemoWrapStyle }}">
+            <div style="{{ rubricDemoHintStyle }}">click to expand / collapse</div>
+            <div style="{{ rubricDemoCardStyle }}">
+              <div style="{{ rubricDemoHeaderStyle }}" onClick="{{ toggleRubricDemo }}">
+                <div style="{{ collapsibleMockHeaderChevronStyle }}">
+                  <sc-if value="{{ rubricDemoOpen }}" hint-placeholder-val="{{ false }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"></path></svg>
+                  </sc-if>
+                  <sc-if value="{{ rubricDemoClosed }}" hint-placeholder-val="{{ true }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                  </sc-if>
+                </div>
+                <span style="{{ collapsibleMockTitleStyle }}">Domain I: A Data-Driven Focus to Support School Achievement <span style="{{ collapsibleMockAsteriskStyle }}">*</span></span>
+                <span style="{{ collapsibleMockBadgeStyle }}">0/3 rated</span>
+              </div>
+              <sc-if value="{{ rubricDemoOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="{{ collapsibleMockRowStyle }}">
+                  <span style="{{ collapsibleMockChevronStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span>
+                  <span style="{{ collapsibleMockQNumStyle }}">Q1.</span>
+                  <span style="{{ collapsibleMockQTextStyle }}">The district leader ensures clear and measurable goals are established for all relevant are...</span>
+                  <span style="{{ collapsibleMockNotRatedStyle }}">Not rated</span>
+                </div>
+                <div style="{{ collapsibleMockRowStyle }}">
+                  <span style="{{ collapsibleMockChevronStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span>
+                  <span style="{{ collapsibleMockQNumStyle }}">Q2.</span>
+                  <span style="{{ collapsibleMockQTextStyle }}">The district leader ensures district and school plans are aligned to the most critical needs...</span>
+                  <span style="{{ collapsibleMockNotRatedStyle }}">Not rated</span>
+                </div>
+                <div style="{{ collapsibleMockRowStyleLast }}">
+                  <span style="{{ collapsibleMockChevronStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span>
+                  <span style="{{ collapsibleMockQNumStyle }}">Q3.</span>
+                  <span style="{{ collapsibleMockQTextStyle }}">The district leader ensures progress toward the achievement of goals is monitored and re...</span>
+                  <span style="{{ collapsibleMockNotRatedStyle }}">Not rated</span>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="{{ processStepRevealStyle.s3 }}" ref="{{ revealRef.s3 }}">
+        <div style="{{ processNumStyle }}">03</div>
+        <div>
+          <h3 style="{{ h3Style }}">Designing clearer feedback and error recovery</h3>
+          <p style="{{ pStyle }}">The original validation showed a generic message after Review, but gave users no indication of what was incomplete or where to find it. I introduced an error summary at the top of the page alongside inline guidance at the field level, giving users an overview and a clear path back to each issue.</p>
+          <div style="{{ errorMockOuterStyle }}">
+            <div style="{{ errorMockPadStyle }}">
+              <div style="{{ errorBannerStyle }}">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.51"></line></svg>
+                Domain I, Domain II, Overall Rating, and Acknowledgments still need to be completed before this observation can be submitted.
+              </div>
+              <div style="{{ errorMockRowStyle }}">
+                <div style="{{ errorTocCardStyle }}">
+                  <div style="{{ errorTocHeaderStyle }}">
+                    <span style="{{ errorTocTitleStyle }}">Table of Contents</span>
+                    <span style="{{ errorTocCollapseStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M18 15l-6-6-6 6"></path></svg>Collapse All</span>
+                  </div>
+                  <div style="{{ errorTocInputStyle }}">Show all elements</div>
+                  <div style="{{ errorTocInputStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>Search with a keyword</div>
+                  <div style="{{ errorTocListStyle }}">
+                    <div style="{{ errorTocRowStyle }}">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A62220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.51"></line></svg>
+                      <span style="{{ errorTocLabelStyle }}">Domain I: A Data-Driven Focus to Support School Achievement <span style="color:#A62220;">*</span></span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M18 15l-6-6-6 6"></path></svg>
+                    </div>
+                    <div style="{{ errorTocRowActiveStyle }}">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.51"></line></svg>
+                      <span style="{{ errorTocLabelStyle }}">Q1. The district leader ensures clear and measurable goals are established for all relevant areas of responsibility that are focused on the most critical needs for improving student achievement.</span>
+                    </div>
+                    <div style="{{ errorTocRowStyle }}">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A62220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.51"></line></svg>
+                      <span style="{{ errorTocLabelStyle }}">Q2. The district leader ensure…</span>
+                    </div>
+                    <div style="{{ errorTocRowStyle }}">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A62220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.51"></line></svg>
+                      <span style="{{ errorTocLabelStyle }}">Q3. The district leader ensure…</span>
+                    </div>
+                    <div style="{{ errorTocRowStyle }}">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A62220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.51"></line></svg>
+                      <span style="{{ errorTocLabelStyle }}">Domain II: Leadership for Improved Instructional Practice <span style="color:#A62220;">*</span></span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M6 9l6 6 6-6"></path></svg>
+                    </div>
+                    <div style="{{ errorTocRowStyle }}">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A62220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.51"></line></svg>
+                      <span style="{{ errorTocLabelStyle }}">Overall Rating <span style="color:#A62220;">*</span></span>
+                    </div>
+                  </div>
+                  <div style="{{ errorTocFooterStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>Scroll to the Top</div>
+                </div>
+                <div style="{{ errorRatingCardStyle }}">
+                  <div style="{{ errorRatingHeaderStyle }}">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M6 9l6 6 6-6"></path></svg>
+                    <span style="{{ errorRatingTitleStyle }}">Overall Rating <span style="color:#A62220;">*</span></span>
+                    <span style="{{ errorRatingBadgeStyle }}">Incomplete</span>
+                  </div>
+                  <div style="{{ errorRatingBodyStyle }}">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                      <span style="{{ errorRatingLabelStyle }}">Scale</span>
+                      <span style="font-size:12.5px;font-weight:500;color:#066042;cursor:pointer;">View Scale</span>
+                    </div>
+                    <div style="{{ errorRatingScaleRowStyle }}">
+                      <div style="{{ errorRatingOptionStyle }}"><span style="{{ errorRatingRadioStyle }}"></span><span style="{{ errorRatingOptionTextStyle }}">Unsatisfactory</span></div>
+                      <div style="{{ errorRatingOptionStyle }}"><span style="{{ errorRatingRadioStyle }}"></span><span style="{{ errorRatingOptionTextStyle }}">Basic</span></div>
+                      <div style="{{ errorRatingOptionStyle }}"><span style="{{ errorRatingRadioStyle }}"></span><span style="{{ errorRatingOptionTextStyle }}">Proficient</span></div>
+                      <div style="{{ errorRatingOptionStyle }}"><span style="{{ errorRatingRadioStyle }}"></span><span style="{{ errorRatingOptionTextStyle }}">Developed</span></div>
+                    </div>
+                    <div style="{{ errorRatingRequiredStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.51"></line></svg>Rating is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="{{ processStepRevealStyle.s4 }}" ref="{{ revealRef.s4 }}">
+        <div style="{{ processNumStyle }}">04</div>
+        <div>
+          <h3 style="{{ h3Style }}">Validating the redesigned workflow</h3>
+          <p style="{{ pStyle }}">I tested the redesigned Conduct workflow with principals and instructional coaches who regularly use the product, asking participants to complete a classroom observation from start to finish. The sessions focused on whether users could navigate the new structure, identify required information, complete the observation, and review their work without additional guidance.</p>
+          <div style="{{ quoteBlockStyle }}">
+            <p style="{{ quoteTextStyle }}">"I knew what needed to be completed and could jump straight to it."</p>
+            <p style="{{ quoteAttrStyle }}">— Principal, internal usability session</p>
+          </div>
+          <div style="{{ quoteBlockStyle }}">
+            <p style="{{ quoteTextStyle }}">"I could see what I needed to complete without having to scroll through everything."</p>
+            <p style="{{ quoteAttrStyle }}">— Instructional coach, usability session</p>
+          </div>
+          <p style="{{ pStyle }}; margin-top:16px;">The new structure gave users clear paths through the workflow without requiring additional instruction.</p>
+        </div>
+      </div>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section id="final" style="{{ sectionStyle }}; margin-bottom:24px;">
+      <div style="{{ sectionEyebrowStyle }}">Final Designs</div>
+    </section>
+
+    <section style="{{ subFlowSectionStyle }}">
+      <h3 style="{{ flowTitleStyle }}">Sticky table of contents</h3>
+      <p style="{{ pStyle }}">The workflow is organized into clearly labeled sections, with required sections marked by a red asterisk and direct navigation to each section.</p>
+      <div style="{{ toggleHintStyle }}">toggle to compare</div>
+      <div style="{{ toggleGroupStyle }}">
+        <div style="{{ toggleRowStyle }}">
+          <button onClick="{{ setFinalAfter.sideNav }}" style="{{ finalTabStyleAfter.sideNav }}">After</button>
+          <button onClick="{{ setFinalBefore.sideNav }}" style="{{ finalTabStyleBefore.sideNav }}">Before</button>
+        </div>
+        <div style="{{ toggleFrameStyle }}">
+          <sc-if value="{{ isFinalBefore.sideNav }}" hint-placeholder-val="{{ true }}">
+            <div style="{{ sideNavBeforeFrameStyle }}">
+              <div style="{{ sideNavBeforeScrollStyle }}"></div>
+              <span style="{{ placeholderCaptionOverlayStyle }}">before: everything on one continuous scroll</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isFinalAfter.sideNav }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ sideNavAfterFrameStyle }}">
+              <video src="assets/toc-after.mp4?v=5" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="metadata" onEnded="{{ replayTocVideo }}" style="{{ sideNavAfterVideoStyle }}" ref="{{ forcePlayVideoRef }}"></video>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section style="{{ subFlowSectionStyle }}">
+      <h3 style="{{ flowTitleStyle }}">Collapsible sections</h3>
+      <p style="{{ pStyle }}">Sections collapse by default and expand on demand, helping users scan the workflow at a glance and focus only on the information they need.</p>
+      <div style="{{ toggleHintStyle }}">toggle to compare</div>
+      <div style="{{ toggleGroupStyle }}">
+        <div style="{{ toggleRowStyle }}">
+          <button onClick="{{ setFinalAfter.collapsible }}" style="{{ finalTabStyleAfter.collapsible }}">After</button>
+          <button onClick="{{ setFinalBefore.collapsible }}" style="{{ finalTabStyleBefore.collapsible }}">Before</button>
+        </div>
+        <div style="{{ toggleFrameStyle }}">
+          <sc-if value="{{ isFinalBefore.collapsible }}" hint-placeholder-val="{{ true }}">
+            <div style="{{ collapsibleBeforeFrameStyle }}">
+              <div style="{{ collapsibleBeforeScrollStyle }}"></div>
+              <span style="{{ placeholderCaptionOverlayStyle }}">before: no way to collapse sections</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isFinalAfter.collapsible }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ collapsibleAfterFrameStyle }}">
+              <video src="assets/collapsible-after.mp4?v=3" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="metadata" onEnded="{{ replayTocVideo }}" style="{{ collapsibleAfterVideoStyle }}" ref="{{ forcePlayVideoRef }}"></video>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section style="{{ subFlowSectionStyle }}">
+      <h3 style="{{ flowTitleStyle }}">Improved information hierarchy</h3>
+      <p style="{{ pStyle }}">Required fields are clearly marked with a red asterisk in the table of contents and within the form, allowing observers to quickly scan for what requires attention.</p>
+      <div style="{{ toggleHintStyle }}">toggle to compare</div>
+      <div style="{{ toggleGroupStyle }}">
+        <div style="{{ toggleRowStyle }}">
+          <button onClick="{{ setFinalAfter.hierarchy2 }}" style="{{ finalTabStyleAfter.hierarchy2 }}">After</button>
+          <button onClick="{{ setFinalBefore.hierarchy2 }}" style="{{ finalTabStyleBefore.hierarchy2 }}">Before</button>
+        </div>
+        <div style="{{ toggleFrameStyle }}">
+          <sc-if value="{{ isFinalBefore.hierarchy2 }}" hint-placeholder-val="{{ true }}">
+            <div style="{{ errorAfterFrameStyle }}">
+              <video src="assets/hierarchy2-before.mp4" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="metadata" onEnded="{{ replayTocVideo }}" style="{{ errorAfterVideoStyle }}" ref="{{ forcePlayVideoRef }}"></video>
+              <span style="{{ placeholderCaptionOverlayStyle }}">before: required and optional fields look identical</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isFinalAfter.hierarchy2 }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ errorAfterFrameStyle }}">
+              <video src="assets/hierarchy2-after.mp4" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="metadata" onEnded="{{ replayTocVideo }}" ref="{{ slowVideoRef }}" style="{{ errorAfterVideoStyle }}"></video>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section style="{{ subFlowSectionStyle }}">
+      <h3 style="{{ flowTitleStyle }}">Error &amp; validation state</h3>
+      <p style="{{ pStyle }}">Errors are surfaced prominently at the top of the page, while red icons and "Incomplete" badges point to unresolved items in the TOC and domain cards. Validation also updates in real time as fields are completed, so users always know what still needs attention.</p>
+      <div style="{{ toggleHintStyle }}">toggle to compare</div>
+      <div style="{{ toggleGroupStyle }}">
+        <div style="{{ toggleRowStyle }}">
+          <button onClick="{{ setFinalAfter.error }}" style="{{ finalTabStyleAfter.error }}">After</button>
+          <button onClick="{{ setFinalBefore.error }}" style="{{ finalTabStyleBefore.error }}">Before</button>
+        </div>
+        <div style="{{ toggleFrameStyle }}">
+          <sc-if value="{{ isFinalBefore.error }}" hint-placeholder-val="{{ true }}">
+            <div style="{{ errorBeforeImageStyle }}">
+              <span style="{{ problemCaptionOverlayStyle }}">before: a generic confirmation dialog, no indication of missing information</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isFinalAfter.error }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ errorAfterFrameStyle }}">
+              <video src="assets/error-after.mp4?v=2" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="metadata" onEnded="{{ replayTocVideo }}" style="{{ errorAfterVideoStyle }}" ref="{{ forcePlayVideoRef }}"></video>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section style="{{ subFlowSectionStyle }}">
+      <h3 style="{{ flowTitleStyle }}">Learner view, post-submission</h3>
+      <p style="{{ pStyle }}">Once submitted, learners can review their completed observation, with ratings, comments, and next steps alongside the context needed to understand their feedback.</p>
+      <div style="{{ toggleGroupStyle }}">
+        <div style="{{ errorAfterFrameStyle }}">
+          <video src="assets/learner-view-after.mp4" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="metadata" onEnded="{{ replayTocVideo }}" ref="{{ forcePlayVideoRef }}" style="{{ errorAfterVideoStyle }}"></video>
+        </div>
+      </div>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section id="results" style="{{ sectionStyle }}">
+      <div style="{{ sectionEyebrowStyle }}">Impact</div>
+      <h2 style="{{ h2Style }}">Shipped to teachers, admins, and principals</h2>
+      <p style="{{ pStyle }}">The redesigned workflow rolled out to the full observation team. In usability testing ahead of launch, every participant completed the core observation task without assistance.</p>
+      <div style="{{ statsGridStyle }}" ref="{{ statsGridRef }}">
+        <div>
+          <div style="{{ bigStatNumStyle }}">{{ statDisplay0 }}</div>
+          <div style="{{ bigStatLabelStyle }}">task success rate in usability testing</div>
+        </div>
+        <div>
+          <div style="{{ bigStatNumStyle }}">{{ statDisplay1 }}</div>
+          <div style="{{ bigStatLabelStyle }}">faster median completion time</div>
+        </div>
+        <div>
+          <div style="{{ bigStatNumStyle }}">{{ statDisplay2 }}</div>
+          <div style="{{ bigStatLabelStyle }}">fewer validation errors</div>
+        </div>
+        <div>
+          <div style="{{ bigStatNumStyle }}">{{ statDisplay3 }}</div>
+          <div style="{{ bigStatLabelStyle }}">of observers rated the new flow easier to use</div>
+        </div>
+      </div>
+    </section>
+
+    <div style="{{ dividerLineStyle }}"></div>
+
+    <section id="reflections" style="{{ sectionStyle }}">
+      <div style="{{ sectionEyebrowStyle }}">Reflections</div>
+      <h2 style="{{ h2Style }}">Learnings</h2>
+
+      <div style="{{ takeawayItemStyle }}">
+        <div style="{{ takeawayHeaderStyle }}">
+          <span style="{{ takeawayNumStyle }}">1</span>
+          <h3 style="{{ takeawayTitleStyle }}">Structure beats simplification</h3>
+        </div>
+        <p style="{{ takeawayTextStyle }}">Conduct didn't need less information. It needed better ways to navigate and prioritize it. Reorganizing the workflow and introducing progressive disclosure reduced cognitive load without removing the context users relied on.</p>
+      </div>
+
+      <div style="{{ takeawayItemStyle }}">
+        <div style="{{ takeawayHeaderStyle }}">
+          <span style="{{ takeawayNumStyle }}">2</span>
+          <h3 style="{{ takeawayTitleStyle }}">Workflow &gt; UI</h3>
+        </div>
+        <p style="{{ takeawayTextStyle }}">The most meaningful improvements came from understanding where users struggled to navigate, complete, and recover within the workflow. The UI changes followed from those behaviors rather than driving them.</p>
+      </div>
+    </section>
+
+    
+    <div style="{{ moreWorkStyle }}">
+      <span style="{{ eyebrowStyle }}">More work</span>
+      <div style="{{ moreWorkGridStyle }}">
+        <a href="case-study-mfa.html" style="{{ moreWorkCardStyle }}">
+          <div style="{{ moreWorkThumbStyle }}">
+            <video src="assets/mfa-cover-v5.mp4" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="metadata" style="{{ moreWorkMediaStyle }}" style-hover="transform:scale(1.18);" ref="{{ forcePlayVideoRef }}"></video>
+          </div>
+          <div style="{{ moreWorkPillStyle }}">iObservation · 2026</div>
+          <h3 style="{{ moreWorkTitleStyle }}">Building a cohesive authentication experience from enrollment to recovery <span style="{{ moreWorkArrowStyle }}">↗</span></h3>
+        </a>
+        <a href="case-study-sustainabli.html" style="{{ moreWorkCardStyle }}">
+          <div style="{{ moreWorkThumbStyle }}">
+            <img src="assets/sustainabli-cover.png" alt="Sustainabli dashboard" style="{{ moreWorkImgStyle }}" style-hover="transform:scale(0.94);">
+          </div>
+          <div style="{{ moreWorkPillStyle }}">Sustainabli · 2024</div>
+          <h3 style="{{ moreWorkTitleStyle }}">Empowering labs to help users efficiently monitor and manage fume hoods <span style="{{ moreWorkArrowStyle }}">↗</span></h3>
+        </a>
+      </div>
+    </div>
+    </article>
+  </main>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { darkMode: false, activeId: 'tldr', statsStarted: false, counts: [0, 0, 0, 0], viewTab: 'after', decisionTab: 'choose', problemActive: 'p1', problemHover: null, hierarchyActive: 'context', rubricDemoOpen: false, revealSteps: [false, false, false, false], finalTabs: { sideNav: 'after', collapsible: 'after', hierarchy2: 'after', error: 'after' }, titleIn: false };
+  sectionIds = ['tldr', 'background', 'problem', 'process', 'final', 'results', 'reflections'];
+  statTargets = [100, 54, 71, 92];
+
+  statsGridRef = (el) => {
+    if (!el || this.statsObserver) return;
+    this.statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !this.state.statsStarted) {
+          this.setState({ statsStarted: true });
+          this.animateStats();
+        }
+      });
+    }, { threshold: 0.3 });
+    this.statsObserver.observe(el);
+  };
+
+  animateStats() {
+    const start = performance.now();
+    const duration = 1200;
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      this.setState({ counts: this.statTargets.map((v) => Math.round(v * eased)) });
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  componentDidMount() {
+    this.updateBaltimoreTime();
+    this._clockInterval = setInterval(() => this.updateBaltimoreTime(), 1000);
+    if (typeof sessionStorage === 'undefined' || sessionStorage.getItem('portfolioUnlocked') !== '1') {
+      window.location.href = 'index.html';
+      return;
+    }
+    requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ titleIn: true })));
+    this.onScroll = () => {
+      let current = this.sectionIds[0];
+      for (const id of this.sectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 160) current = id;
+      }
+      if (current !== this.state.activeId) this.setState({ activeId: current });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._clockInterval);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.statsObserver) this.statsObserver.disconnect();
+  }
+
+  updateBaltimoreTime() {
+    const str = new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit', second: '2-digit' });
+    this.setState({ baltimoreTime: str });
+  }
+
+  revealRef(index) {
+    return (el) => {
+      if (!el || el.dataset.observed) return;
+      el.dataset.observed = '1';
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.setState((s) => {
+              const next = [...s.revealSteps];
+              next[index] = true;
+              return { revealSteps: next };
+            });
+          }
+        });
+      }, { threshold: 0.25 });
+      obs.observe(el);
+    };
+  }
+
+  revealStyleFor(index) {
+    const revealed = this.state.revealSteps[index];
+    return `opacity:${revealed ? 1 : 0};transform:translateY(${revealed ? 0 : 20}px);transition:opacity 600ms cubic-bezier(0.16,1,0.3,1),transform 600ms cubic-bezier(0.16,1,0.3,1);`;
+  }
+
+  problemCardStyle(key, dark, accent) {
+    const isActive = this.state.problemActive === key;
+    const isHover = this.state.problemHover === key;
+    const defaultBg = dark ? 'hsl(0 0% 18%)' : '#EEEEEE';
+    const activeBg = dark ? 'hsl(0 0% 15%)' : '#fff';
+    const hoverBg = dark ? 'hsl(215 25% 20%)' : '#EEF3FC';
+    let bg = defaultBg;
+    let border = 'transparent';
+    if (isActive) { bg = activeBg; border = accent; }
+    else if (isHover) { bg = hoverBg; border = accent; }
+    return `box-sizing:border-box;display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:10px;cursor:pointer;background:${bg};border:2px solid ${border};transition:all 0.15s ease;`;
+  }
+
+  problemBadgeStyle(key, dark, accent, text) {
+    const isActive = this.state.problemActive === key;
+    const isHover = this.state.problemHover === key;
+    const defaultBg = dark ? 'hsl(0 0% 26%)' : '#DEDEDE';
+    const hoverBg = dark ? 'hsl(215 30% 28%)' : '#DCE7FB';
+    const hoverColor = dark ? '#8FB4EE' : '#3B6FD1';
+    let bg = defaultBg;
+    let color = text;
+    if (isActive) { bg = accent; color = '#fff'; }
+    else if (isHover) { bg = hoverBg; color = hoverColor; }
+    return `flex-shrink:0;width:24px;height:24px;border-radius:50%;background:${bg};color:${color};font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all 0.15s ease;`;
+  }
+
+  jumpToSection(id) {
+    return (e) => {
+      e.preventDefault();
+      const el = document.getElementById(id);
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - 100;
+      window.scrollTo({ top, behavior: 'smooth' });
+      this.setState({ activeId: id });
+    };
+  }
+
+  forcePlayVideoRef = (el) => {
+    if (!el || el.__forceBound) return;
+    el.__forceBound = true;
+    el.muted = true;
+    el.defaultMuted = true;
+    el.loop = true;
+    el.playsInline = true;
+    el.setAttribute('playsinline', '');
+    const go = () => { const p = el.play(); if (p && p.catch) p.catch(() => {}); };
+    ['loadeddata', 'canplay', 'canplaythrough'].forEach(ev => el.addEventListener(ev, go));
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { el.preload = 'auto'; el.load(); go(); } }), { threshold: 0.05, rootMargin: '400px' }).observe(el);
+    } else { go(); }
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) go(); });
+  };
+
+  renderVals() {
+    const dark = this.state.darkMode;
+    const bg = dark ? 'hsl(0 0% 7%)' : '#FFFFFF';
+    const text = dark ? 'hsl(40 11% 94%)' : '#333333';
+    const border = dark ? 'hsl(0 0% 15%)' : 'hsl(40 10% 85%)';
+    const muted = dark ? 'hsl(0 0% 60%)' : 'hsl(0 0% 40%)';
+    const card = dark ? 'hsl(0 0% 11%)' : 'hsl(36 10% 90%)';
+    const navBg = dark ? 'rgba(30,30,30,0.8)' : 'rgba(255,255,255,0.8)';
+    const pillActiveBg = dark ? 'rgba(255,255,255,0.08)' : 'hsl(0 0% 96%)';
+    const accent = '#2563EB';
+
+    const finalTabStyle = (section, activeVal) => {
+      const active = this.state.finalTabs[section] === activeVal;
+      return `flex:1;border:none;cursor:pointer;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;font-weight:400;color:${active ? text : muted};background:${active ? (dark ? 'hsl(0 0% 15%)' : '#fff') : 'transparent'};border-bottom:2px solid ${active ? accent : 'transparent'};transition:all 0.2s ease;`;
+    };
+    const setFinalTab = (section, val) => () => this.setState((s) => ({ finalTabs: { ...s.finalTabs, [section]: val } }));
+
+    const tabStyleFor = (group, key, activeVal) => {
+      const active = this.state[group] === activeVal;
+      return `flex:1;border:none;cursor:pointer;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;font-weight:400;color:${active ? text : muted};background:${active ? (dark ? 'hsl(0 0% 15%)' : '#fff') : 'transparent'};border-bottom:2px solid ${active ? accent : 'transparent'};transition:all 0.2s ease;`;
+    };
+
+    return {
+      darkMode: dark,
+      notDarkMode: !dark,
+      toggleDark: () => this.setState((s) => ({ darkMode: !s.darkMode })),
+      rubricDemoOpen: this.state.rubricDemoOpen,
+      rubricDemoClosed: !this.state.rubricDemoOpen,
+      toggleRubricDemo: () => this.setState((s) => ({ rubricDemoOpen: !s.rubricDemoOpen })),
+
+      pageStyle: `min-height:100vh;background:${bg};color:${text};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;transition:background 0.3s ease,color 0.3s ease;`,
+      scrollBlurStyle: `position:fixed;top:0;left:0;right:0;height:160px;z-index:40;pointer-events:none;max-width:1080px;margin:0 auto;padding:0 40px;display:flex;gap:56px;`,
+      blurSpacerStyle: `width:170px;flex-shrink:0;`,
+      blurAreaStyle: `position:relative;flex:1;min-width:0;max-width:700px;`,
+      blurLayerStyle1: `position:absolute;inset:0;backdrop-filter:blur(0.7px);-webkit-backdrop-filter:blur(0.7px);mask-image:linear-gradient(to bottom, black 0%, black 25%, transparent 50%);-webkit-mask-image:linear-gradient(to bottom, black 0%, black 25%, transparent 50%);`,
+      blurLayerStyle2: `position:absolute;inset:0;backdrop-filter:blur(1.8px);-webkit-backdrop-filter:blur(1.8px);mask-image:linear-gradient(to bottom, black 25%, black 45%, transparent 65%);-webkit-mask-image:linear-gradient(to bottom, black 25%, black 45%, transparent 65%);`,
+      blurLayerStyle3: `position:absolute;inset:0;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);mask-image:linear-gradient(to bottom, black 45%, black 65%, transparent 85%);-webkit-mask-image:linear-gradient(to bottom, black 45%, black 65%, transparent 85%);`,
+      blurLayerStyle4: `position:absolute;inset:0;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);mask-image:linear-gradient(to bottom, black 65%, black 85%, transparent 100%);-webkit-mask-image:linear-gradient(to bottom, black 65%, black 85%, transparent 100%);`,
+      navOuterStyle: `position:fixed;top:24px;left:0;right:0;display:flex;justify-content:center;z-index:50;`,
+      navPillStyle: `display:flex;align-items:center;gap:2px;background:${navBg};backdrop-filter:blur(8px);border:1px solid ${border};border-radius:999px;padding:4px;box-shadow:0 1px 2px rgba(0,0,0,0.04);`,
+      tabStyle: `padding:7px 13px;border-radius:999px;font-size:14px;font-weight:400;color:${muted};transition:all 0.2s ease;`,
+      dividerStyle: `width:1px;height:16px;background:${border};margin:0 1px 0 6px;`,
+      themeBtnStyle: `width:30px;height:30px;border-radius:999px;border:none;background:${pillActiveBg};cursor:pointer;display:flex;align-items:center;justify-content:center;color:${muted};`,
+
+      mainOuterStyle: `max-width:1080px;margin:0 auto;padding:120px 40px 100px;display:flex;gap:56px;align-items:flex-start;`,
+      sidebarStyle: `width:170px;flex-shrink:0;position:sticky;top:120px;display:flex;flex-direction:column;`,
+      articleStyle: `flex:1;min-width:0;max-width:700px;`,
+      backLinkStyle: `display:inline-block;font-size:13px;font-family:'Inter',sans-serif;letter-spacing:0px;color:${muted};margin-bottom:32px;`,
+      contentsLabelStyle: `font-size:11px;font-weight:600;letter-spacing:0.08em;color:${muted};text-transform:uppercase;margin-bottom:16px;`,
+      sidebarNavStyle: `display:flex;flex-direction:column;gap:14px;`,
+      jumpTo: {
+        tldr: this.jumpToSection('tldr'),
+        background: this.jumpToSection('background'),
+        problem: this.jumpToSection('problem'),
+        process: this.jumpToSection('process'),
+        final: this.jumpToSection('final'),
+        results: this.jumpToSection('results'),
+        reflections: this.jumpToSection('reflections'),
+      },
+      linkStyleFor: {
+        tldr: `font-size:13px;line-height:18px;letter-spacing:0px;font-family:'Inter',sans-serif;transition:color 0.15s ease;color:${this.state.activeId === 'tldr' ? (dark ? '#F4F4F5' : '#09090B') : '#71717A'};font-weight:400;`,
+        background: `font-size:13px;line-height:18px;letter-spacing:0px;font-family:'Inter',sans-serif;transition:color 0.15s ease;color:${this.state.activeId === 'background' ? (dark ? '#F4F4F5' : '#09090B') : '#71717A'};font-weight:400;`,
+        problem: `font-size:13px;line-height:18px;letter-spacing:0px;font-family:'Inter',sans-serif;transition:color 0.15s ease;color:${this.state.activeId === 'problem' ? (dark ? '#F4F4F5' : '#09090B') : '#71717A'};font-weight:400;`,
+        process: `font-size:13px;line-height:18px;letter-spacing:0px;font-family:'Inter',sans-serif;transition:color 0.15s ease;color:${this.state.activeId === 'process' ? (dark ? '#F4F4F5' : '#09090B') : '#71717A'};font-weight:400;`,
+        final: `font-size:13px;line-height:18px;letter-spacing:0px;font-family:'Inter',sans-serif;transition:color 0.15s ease;color:${this.state.activeId === 'final' ? (dark ? '#F4F4F5' : '#09090B') : '#71717A'};font-weight:400;`,
+        results: `font-size:13px;line-height:18px;letter-spacing:0px;font-family:'Inter',sans-serif;transition:color 0.15s ease;color:${this.state.activeId === 'results' ? (dark ? '#F4F4F5' : '#09090B') : '#71717A'};font-weight:400;`,
+        reflections: `font-size:13px;line-height:18px;letter-spacing:0px;font-family:'Inter',sans-serif;transition:color 0.15s ease;color:${this.state.activeId === 'reflections' ? (dark ? '#F4F4F5' : '#09090B') : '#71717A'};font-weight:400;`,
+      },
+
+      tagRowStyle: `display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 20px;`,
+      tagStyle: `font-size:12px;color:${muted};background:${dark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.5)'};border:1px solid ${border};border-radius:999px;padding:4px 10px;`,
+      titleWrapStyle: `font-size:40px;font-weight:700;letter-spacing:-0.01em;margin:0 0 16px;display:flex;flex-wrap:wrap;gap:0 0.28em;`,
+      titleWords: 'Redesigning the Conduct Workflow'.split(' ').map((text, i) => ({
+        text,
+        style: `display:inline-block;filter:blur(${this.state.titleIn ? 0 : 16}px);opacity:${this.state.titleIn ? 1 : 0};transition:filter 0.9s cubic-bezier(0.22,1,0.36,1) ${i * 0.09}s,opacity 0.7s ease-out ${i * 0.09}s;`,
+      })),
+
+      heroFrameStyle: `aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0 0 32px;background:${dark ? 'hsl(0 0% 12%)' : '#F4F4F4'};border-radius:20px;padding:40px;box-sizing:border-box;`,
+      heroGridStyle: `display:flex;flex-direction:column;gap:28px;padding-bottom:40px;border-bottom:1px solid ${border};margin-bottom:32px;`,
+      limitedNoticeStyle: `display:block;width:fit-content;box-sizing:border-box;font-size:13px;line-height:1.6;color:${muted};background:${dark ? 'hsl(0 0% 14%)' : '#fff'};border:1px solid ${border};border-radius:8px;padding:8px 14px;margin:24px 0 32px;`,
+      eyebrowStyle: `font-size:11px;font-weight:600;letter-spacing:0.08em;color:${muted};text-transform:uppercase;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;`,
+      tldrTextStyle: `font-size:14px;line-height:20px;letter-spacing:-0.1px;margin:12px 0 0;color:#333333;font-family:'Inter',sans-serif;font-weight:400;`,
+      metaColStyle: `display:flex;flex-direction:row;gap:40px;flex-wrap:wrap;`,
+      metaLabelStyle: `font-size:11px;font-weight:600;letter-spacing:0.08em;color:${muted};text-transform:uppercase;margin-bottom:4px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;`,
+      metaValueStyle: `font-size:14px;line-height:1.7;letter-spacing:-0.1px;color:${text};font-family:'Inter',sans-serif;font-weight:400;`,
+
+      imgPlaceholderWideStyle: `aspect-ratio:16/9;border-radius:20px;background:linear-gradient(135deg,${dark ? '#2c3542,#2c4232' : '#dceaf5,#dcf5e4'});display:flex;align-items:center;justify-content:center;margin-bottom:25px;`,
+      imgPlaceholderNarrowStyle: `aspect-ratio:3/4;width:220px;flex-shrink:0;border-radius:14px;background:${dark ? 'hsl(0 0% 20%)' : '#fff'};border:1px solid ${border};display:flex;align-items:center;justify-content:center;`,
+      placeholderCaptionStyle: `font-family:monospace;font-size:12px;color:${dark ? '#b8d0c9' : '#6a8a7a'};text-align:center;padding:0 16px;`,
+      hierarchyCardStyle: `display:flex;gap:28px;align-items:stretch;border:1px solid ${border};border-radius:16px;padding:24px;margin:16px 0 0;`,
+      hierarchyListStyle: `display:flex;flex-direction:column;justify-content:space-between;gap:20px;flex:1;min-width:0;`,
+      hierarchyMockStyle: `width:180px;flex-shrink:0;display:flex;flex-direction:column;justify-content:space-between;gap:12px;background:${dark ? 'hsl(0 0% 20%)' : '#fff'};border:1px solid ${border};border-radius:14px;padding:16px;`,
+      hierarchyMockLineStyle: `height:8px;border-radius:4px;background:${dark ? 'hsl(0 0% 32%)' : '#D9D9D9'};`,
+      hierarchyMockLineShortStyle: `height:8px;width:60%;border-radius:4px;background:${dark ? 'hsl(0 0% 32%)' : '#D9D9D9'};margin-bottom:6px;`,
+      hierarchyMockRatingRowStyle: `display:flex;align-items:center;justify-content:space-between;gap:8px;`,
+      hierarchyMockLineTinyStyle: `height:7px;width:52px;border-radius:4px;background:${dark ? 'hsl(0 0% 32%)' : '#D9D9D9'};`,
+      hierarchyMockDotsRowStyle: `display:flex;gap:4px;`,
+      hierarchyMockBoxRowStyle: `display:flex;gap:6px;`,
+      hierarchyMockBoxStyle: `flex:1;height:20px;border-radius:5px;border:1px solid ${dark ? 'hsl(0 0% 32%)' : '#D9D9D9'};background:transparent;`,
+      hierarchyMockFilledBoxStyle: `width:100%;height:48px;border-radius:6px;background:${dark ? 'hsl(0 0% 32%)' : '#D9D9D9'};`,
+      hierarchyMockSmallBoxStyle: `width:100%;height:11px;border-radius:4px;background:${dark ? 'hsl(0 0% 32%)' : '#D9D9D9'};`,
+      hierarchyDescStyle: `font-size:14px;line-height:20px;letter-spacing:-0.1px;color:${text};font-family:'Inter',sans-serif;font-weight:400;`,
+      hierarchyItemStyle: {
+        context: `border-left:2px solid ${this.state.hierarchyActive === 'context' ? accent : 'transparent'};padding-left:14px;cursor:pointer;transition:border-color 0.2s ease;`,
+        rubric: `border-left:2px solid ${this.state.hierarchyActive === 'rubric' ? accent : 'transparent'};padding-left:14px;cursor:pointer;transition:border-color 0.2s ease;`,
+        notes: `border-left:2px solid ${this.state.hierarchyActive === 'notes' ? accent : 'transparent'};padding-left:14px;cursor:pointer;transition:border-color 0.2s ease;`,
+      },
+      hierarchyLabelStyle: {
+        context: `font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${this.state.hierarchyActive === 'context' ? accent : muted};font-family:'IBM Plex Mono',monospace;margin-bottom:4px;transition:color 0.2s ease;`,
+        rubric: `font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${this.state.hierarchyActive === 'rubric' ? accent : muted};font-family:'IBM Plex Mono',monospace;margin-bottom:4px;transition:color 0.2s ease;`,
+        notes: `font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${this.state.hierarchyActive === 'notes' ? accent : muted};font-family:'IBM Plex Mono',monospace;margin-bottom:4px;transition:color 0.2s ease;`,
+      },
+      hierarchyMockBlockStyle: {
+        context: `border-radius:8px;padding:8px;transition:background 0.2s ease;background:${this.state.hierarchyActive === 'context' ? (dark ? 'hsl(210 30% 26%)' : '#E5EEF7') : 'transparent'};`,
+        rubric: `border-radius:8px;padding:8px;transition:background 0.2s ease;background:${this.state.hierarchyActive === 'rubric' ? (dark ? 'hsl(210 30% 26%)' : '#E5EEF7') : 'transparent'};`,
+        notes: `border-radius:8px;padding:8px;flex:1;display:flex;flex-direction:column;justify-content:center;transition:background 0.2s ease;background:${this.state.hierarchyActive === 'notes' ? (dark ? 'hsl(210 30% 26%)' : '#E5EEF7') : 'transparent'};`,
+      },
+      hierarchyMockDotStyle: {
+        d1: `width:10px;height:10px;border-radius:50%;background:${this.state.hierarchyActive === 'rubric' ? accent : (dark ? 'hsl(0 0% 32%)' : '#D9D9D9')};transition:background 0.2s ease;`,
+        d2: `width:10px;height:10px;border-radius:50%;background:${this.state.hierarchyActive === 'rubric' ? accent : (dark ? 'hsl(0 0% 32%)' : '#D9D9D9')};transition:background 0.2s ease;`,
+        d3: `width:10px;height:10px;border-radius:50%;background:${this.state.hierarchyActive === 'rubric' ? (dark ? 'hsl(0 0% 32%)' : '#D9D9D9') : (dark ? 'hsl(0 0% 32%)' : '#D9D9D9')};transition:background 0.2s ease;`,
+        d4: `width:10px;height:10px;border-radius:50%;background:${dark ? 'hsl(0 0% 28%)' : '#EAEAEA'};transition:background 0.2s ease;`,
+      },
+      hierarchyMockBarStyle: {
+        b1: `width:16px;height:20%;border-radius:3px;background:${this.state.hierarchyActive === 'rubric' ? accent : (dark ? 'hsl(0 0% 32%)' : '#D9D9D9')};transition:background 0.2s ease;`,
+        b2: `width:16px;height:45%;border-radius:3px;background:${this.state.hierarchyActive === 'rubric' ? accent : (dark ? 'hsl(0 0% 32%)' : '#D9D9D9')};transition:background 0.2s ease;`,
+        b3: `width:16px;height:100%;border-radius:3px;background:${this.state.hierarchyActive === 'rubric' ? accent : (dark ? 'hsl(0 0% 32%)' : '#D9D9D9')};transition:background 0.2s ease;`,
+        b4: `width:16px;height:65%;border-radius:3px;background:${this.state.hierarchyActive === 'rubric' ? accent : (dark ? 'hsl(0 0% 32%)' : '#D9D9D9')};transition:background 0.2s ease;`,
+      },
+      setHierarchyActive: {
+        context: () => this.setState({ hierarchyActive: 'context' }),
+        rubric: () => this.setState({ hierarchyActive: 'rubric' }),
+        notes: () => this.setState({ hierarchyActive: 'notes' }),
+      },
+
+      sectionStyle: `margin-bottom:80px;scroll-margin-top:100px;`,
+      sectionEyebrowStyle: `font-size:11px;font-weight:600;letter-spacing:0.08em;color:${muted};text-transform:uppercase;margin-bottom:12px;`,
+      h2Style: `font-size:24px;font-weight:700;margin:0 0 16px;letter-spacing:-0.01em;`,
+      h3Style: `font-size:17px;font-weight:700;margin:0 0 8px;`,
+      pStyle: `font-size:14px;line-height:20px;letter-spacing:-0.1px;color:${text};margin:0;font-family:'Inter',sans-serif;font-weight:400;`,
+      backgroundIntroStyle: `font-size:14px;line-height:20px;letter-spacing:-0.1px;font-family:'Inter',sans-serif;font-weight:400;color:${text};margin:0;`,
+      quoteTextStyle: `font-size:14px;line-height:20px;letter-spacing:-0.1px;color:${text};margin:0;font-family:'Inter',sans-serif;font-weight:400;font-style:italic;`,
+      quoteAttrStyle: `font-size:14px;color:${muted};margin:4px 0 0;font-family:'Inter',sans-serif;`,
+      quoteBlockStyle: `border-left:2px solid ${accent};padding-left:14px;margin-top:16px;`,
+
+      flowDiagramStyle: `display:flex;align-items:stretch;gap:4px;padding:14px 10px;margin:24px 0;background:${dark ? 'hsl(0 0% 12%)' : 'hsl(0 0% 91%)'};border:1px solid ${border};border-radius:12px;`,
+      flowNodeStyle: `flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;background:${dark ? 'hsl(0 0% 16%)' : '#fff'};border:1px solid ${border};border-radius:8px;padding:8px 6px;`,
+      flowNodeAccentStyle: `flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;background:${dark ? 'hsl(0 0% 16%)' : '#fff'};border:1px solid ${border};border-radius:8px;padding:8px 6px;`,
+      flowIconBadgeStyle: `width:18px;height:18px;border-radius:5px;background:${dark ? 'hsl(0 0% 22%)' : 'hsl(0 0% 95%)'};display:flex;align-items:center;justify-content:center;color:${text};`,
+      flowNodeTitleStyle: `font-size:10.5px;font-weight:400;color:${text};line-height:1.25;`,
+      flowNodeSubStyle: `font-size:9px;color:${muted};line-height:1.3;`,
+      flowArrowStyle: `flex-shrink:0;color:${muted};display:flex;align-items:center;`,
+
+      numberedListStyle: `display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;`,
+      numberedTitleStyle: `font-size:15px;font-weight:700;`,
+      numberedTextStyle: `font-size:14px;line-height:20px;letter-spacing:-0.1px;color:${text};font-family:'Inter',sans-serif;font-weight:400;`,
+      problemPreviewStyle: `aspect-ratio:16/9;border-radius:16px;background:${dark ? 'hsl(0 0% 11%)' : 'hsl(0 0% 90%)'};position:relative;overflow:hidden;margin-top:20px;`,
+      problemScrollBoxStyle: `position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;`,
+      problemScrollImgStyle: `display:block;width:100%;height:auto;`,
+      problemCropStyle: {
+        p1: `position:absolute;top:0;left:-0.5%;right:-0.5%;bottom:-0.5%;background-image:url('assets/observation-form-outdated-2.png');background-repeat:no-repeat;background-size:cover;background-position:50% 0%;`,
+        p2: `position:absolute;inset:0;background-image:url('assets/observation-form-scroll-2.png');background-repeat:no-repeat;background-size:100% auto;background-position:50% 0%;animation:conductScrollForm 50s ease-in-out infinite;`,
+        p3: `position:absolute;inset:0;background-image:url('assets/observation-form-outdated.png');background-repeat:no-repeat;background-size:contain;background-position:50% 0%;`,
+        p4: `position:absolute;inset:0;background-image:url('assets/observation-form-warning-review.png');background-repeat:no-repeat;background-size:contain;background-position:50% 50%;`,
+      },
+      problemCaptionOverlayStyle: `position:absolute;left:12px;bottom:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:400;color:#fff;text-transform:uppercase;letter-spacing:0.02em;background:rgba(0,0,0,0.6);padding:5px 10px;border-radius:6px;`,
+      problemHintStyle: `font-size:12px;color:${muted};text-transform:uppercase;letter-spacing:0.02em;font-family:'IBM Plex Mono',monospace;text-align:right;margin-top:10px;`,
+      isProblem1: (this.state.problemHover || this.state.problemActive) === 'p1',
+      isProblem2: (this.state.problemHover || this.state.problemActive) === 'p2',
+      isProblem3: (this.state.problemHover || this.state.problemActive) === 'p3',
+      isProblem4: (this.state.problemHover || this.state.problemActive) === 'p4',
+      setProblemHover: {
+        p1: () => this.setState({ problemHover: 'p1' }),
+        p2: () => this.setState({ problemHover: 'p2' }),
+        p3: () => this.setState({ problemHover: 'p3' }),
+        p4: () => this.setState({ problemHover: 'p4' }),
+      },
+      clearProblemHover: () => this.setState({ problemHover: null }),
+      setProblemActive: {
+        p1: () => this.setState({ problemActive: 'p1' }),
+        p2: () => this.setState({ problemActive: 'p2' }),
+        p3: () => this.setState({ problemActive: 'p3' }),
+        p4: () => this.setState({ problemActive: 'p4' }),
+      },
+      numberedHeaderRowStyle: `display:flex;align-items:center;gap:12px;`,
+      numberedItemStyle: {
+        p1: this.problemCardStyle('p1', dark, accent),
+        p2: this.problemCardStyle('p2', dark, accent),
+        p3: this.problemCardStyle('p3', dark, accent),
+        p4: this.problemCardStyle('p4', dark, accent),
+      },
+      numberBadgeStyle: {
+        p1: this.problemBadgeStyle('p1', dark, accent, text),
+        p2: this.problemBadgeStyle('p2', dark, accent, text),
+        p3: this.problemBadgeStyle('p3', dark, accent, text),
+        p4: this.problemBadgeStyle('p4', dark, accent, text),
+      },
+
+      processStepStyle: `display:flex;gap:20px;margin-bottom:24px;`,
+      processNumStyle: `flex-shrink:0;width:32px;font-size:22px;font-weight:700;color:${muted};padding-top:2px;line-height:1;`,
+      revealRef: {
+        s1: this.revealRef(0),
+        s2: this.revealRef(1),
+        s3: this.revealRef(2),
+        s4: this.revealRef(3),
+      },
+      processStepRevealStyle: {
+        s1: `display:flex;gap:20px;margin-bottom:24px;${this.revealStyleFor(0)}`,
+        s2: `display:flex;gap:20px;margin-bottom:24px;${this.revealStyleFor(1)}`,
+        s3: `display:flex;gap:20px;margin-bottom:24px;${this.revealStyleFor(2)}`,
+        s4: `display:flex;gap:20px;margin-bottom:24px;${this.revealStyleFor(3)}`,
+      },
+
+      takeawayItemStyle: `margin-top:32px;`,
+      takeawayHeaderStyle: `display:flex;align-items:center;gap:16px;margin-bottom:8px;`,
+      takeawayNumStyle: `flex-shrink:0;width:24px;height:24px;border-radius:50%;background:${card};color:${text};font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;`,
+      takeawayTitleStyle: `font-size:17px;font-weight:700;margin:0;`,
+      takeawayTextStyle: `font-size:14px;line-height:20px;letter-spacing:-0.1px;color:${text};margin:0 0 0 44px;font-family:'Inter',sans-serif;font-weight:400;`,
+      subFlowSectionStyle: `margin-bottom:80px;`,
+      deviceRowStyle: `display:flex;align-items:flex-end;justify-content:center;gap:56px;padding:32px 0;`,
+      deviceLaptopWrapStyle: `display:flex;flex-direction:column;align-items:center;gap:16px;width:380px;`,
+      deviceLaptopFrameStyle: `width:100%;background:${dark ? 'hsl(0 0% 18%)' : '#fff'};border:1px solid ${border};border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,0.08);overflow:hidden;`,
+      deviceLaptopBarStyle: `height:24px;background:${dark ? 'hsl(0 0% 14%)' : '#F4F4F4'};border-bottom:1px solid ${border};`,
+      deviceLaptopScreenStyle: `aspect-ratio:16/10;background:${dark ? 'hsl(0 0% 10%)' : '#fafafa'};`,
+      deviceMobileWrapStyle: `display:flex;flex-direction:column;align-items:center;gap:16px;width:150px;`,
+      deviceMobileFrameStyle: `width:100%;background:${dark ? 'hsl(0 0% 18%)' : '#fff'};border:1px solid ${border};border-radius:24px;box-shadow:0 12px 32px rgba(0,0,0,0.08);overflow:hidden;padding-top:14px;`,
+      deviceMobileNotchStyle: `width:36px;height:6px;border-radius:3px;background:${dark ? 'hsl(0 0% 30%)' : '#ddd'};margin:0 auto 10px;`,
+      deviceMobileScreenStyle: `aspect-ratio:9/17;background:${dark ? 'hsl(0 0% 10%)' : '#fafafa'};`,
+      deviceLabelStyle: `font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:${muted};font-family:'IBM Plex Mono',monospace;`,
+
+      rubricDemoWrapStyle: `margin-top:24px;`,
+      rubricDemoHintStyle: `font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:${muted};font-family:'IBM Plex Mono',monospace;text-align:right;margin-bottom:6px;`,
+      rubricDemoCardStyle: `background:${dark ? 'hsl(0 0% 14%)' : 'rgb(255,255,255)'};border:1px solid ${dark ? 'hsl(0 0% 28%)' : 'rgb(226,232,240)'};border-radius:16px;box-shadow:0px 1px 4px 0px rgba(0,0,0,0.06);box-sizing:border-box;width:100%;overflow:hidden;cursor:pointer;`,
+      rubricDemoHeaderStyle: `display:flex;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid ${dark ? 'hsl(0 0% 28%)' : 'rgb(226,232,240)'};cursor:pointer;`,
+      rubricDemoStatusRowStyle: `display:flex;align-items:center;gap:8px;flex-wrap:wrap;`,
+      rubricDemoLabelStyle: `font-size:9.5px;font-weight:600;letter-spacing:0.04em;color:${muted};`,
+      rubricDemoBadgeStyle: `font-size:10.5px;font-weight:600;color:#B4630A;background:${dark ? 'hsl(30 60% 20%)' : '#FDEBD3'};padding:3px 8px;border-radius:999px;`,
+      rubricDemoDateStyle: `font-size:11.5px;color:${text};`,
+      rubricDemoChevronStyle: `flex-shrink:0;width:20px;height:20px;border:1px solid ${border};border-radius:5px;display:flex;align-items:center;justify-content:center;color:${muted};`,
+      rubricDemoBodyStyle: `border-top:1px solid ${border};margin-top:8px;padding-top:8px;`,
+      rubricDemoSubLabelStyle: `font-size:9.5px;font-weight:600;letter-spacing:0.06em;color:${muted};text-transform:uppercase;margin-bottom:3px;`,
+      rubricDemoNoteStyle: `font-size:12px;line-height:1.4;color:${text};font-family:'Inter Tight',sans-serif;margin:0 0 8px;`,
+      rubricDemoSourceBoxStyle: `background:${dark ? 'hsl(0 0% 20%)' : '#F5F5F3'};border-radius:6px;padding:6px 10px;`,
+      rubricDemoSourceLinkStyle: `font-size:11.5px;color:${text};margin-bottom:3px;`,
+      rubricDemoMetaStyle: `font-size:10.5px;color:${muted};`,
+      flowTitleStyle: `font-size:20px;font-weight:700;margin:0 0 12px;`,
+
+      isViewBefore: this.state.viewTab === 'before',
+      isViewAfter: this.state.viewTab === 'after',
+      setViewTab: {
+        before: () => this.setState({ viewTab: 'before' }),
+        after: () => this.setState({ viewTab: 'after' }),
+      },
+      viewTabStyle: {
+        before: tabStyleFor('viewTab', 'before', 'before'),
+        after: tabStyleFor('viewTab', 'after', 'after'),
+      },
+
+      isDecisionChoose: this.state.decisionTab === 'choose',
+      isDecisionConfirm: this.state.decisionTab === 'confirm',
+      isDecisionResolved: this.state.decisionTab === 'resolved',
+      setDecisionTab: {
+        choose: () => this.setState({ decisionTab: 'choose' }),
+        confirm: () => this.setState({ decisionTab: 'confirm' }),
+        resolved: () => this.setState({ decisionTab: 'resolved' }),
+      },
+      decisionTabStyle: {
+        choose: tabStyleFor('decisionTab', 'choose', 'choose'),
+        confirm: tabStyleFor('decisionTab', 'confirm', 'confirm'),
+        resolved: tabStyleFor('decisionTab', 'resolved', 'resolved'),
+      },
+
+      toggleGroupStyle: `border:1px solid ${border};border-radius:16px;overflow:hidden;margin-top:12px;`,
+      isFinalBefore: {
+        sideNav: this.state.finalTabs.sideNav === 'before',
+        collapsible: this.state.finalTabs.collapsible === 'before',
+        hierarchy2: this.state.finalTabs.hierarchy2 === 'before',
+        error: this.state.finalTabs.error === 'before',
+      },
+      isFinalAfter: {
+        sideNav: this.state.finalTabs.sideNav === 'after',
+        collapsible: this.state.finalTabs.collapsible === 'after',
+        hierarchy2: this.state.finalTabs.hierarchy2 === 'after',
+        error: this.state.finalTabs.error === 'after',
+      },
+      setFinalBefore: {
+        sideNav: setFinalTab('sideNav', 'before'),
+        collapsible: setFinalTab('collapsible', 'before'),
+        hierarchy2: setFinalTab('hierarchy2', 'before'),
+        error: setFinalTab('error', 'before'),
+      },
+      setFinalAfter: {
+        sideNav: setFinalTab('sideNav', 'after'),
+        collapsible: setFinalTab('collapsible', 'after'),
+        hierarchy2: setFinalTab('hierarchy2', 'after'),
+        error: setFinalTab('error', 'after'),
+      },
+      finalTabStyleBefore: {
+        sideNav: finalTabStyle('sideNav', 'before'),
+        collapsible: finalTabStyle('collapsible', 'before'),
+        hierarchy2: finalTabStyle('hierarchy2', 'before'),
+        error: finalTabStyle('error', 'before'),
+      },
+      finalTabStyleAfter: {
+        sideNav: finalTabStyle('sideNav', 'after'),
+        collapsible: finalTabStyle('collapsible', 'after'),
+        hierarchy2: finalTabStyle('hierarchy2', 'after'),
+        error: finalTabStyle('error', 'after'),
+      },
+      toggleRowStyle: `display:flex;width:100%;box-sizing:border-box;background:${card};`,
+      toggleHintStyle: `font-size:12px;color:${muted};text-transform:uppercase;letter-spacing:0.06em;font-family:'IBM Plex Mono',monospace;text-align:right;margin-top:20px;`,
+      toggleFrameStyle: `border:none;padding:0;background:${dark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.015)'};`,
+      errorBeforeImageStyle: `aspect-ratio:16/9;background-color:#fff;background-image:url('assets/observation-form-warning-review.png');background-repeat:no-repeat;background-size:135%;background-position:50% -40px;position:relative;margin:0;`,
+      toggleImagePlaceholderStyle: `aspect-ratio:16/9;background:linear-gradient(135deg,${dark ? '#2c3542,#2c4232' : '#dceaf5,#dcf5e4'});display:flex;align-items:center;justify-content:center;margin:0;`,
+      sideNavBeforeFrameStyle: `aspect-ratio:16/9;position:relative;overflow:hidden;margin:0;`,
+      sideNavAfterFrameStyle: `aspect-ratio:16/9;position:relative;overflow:hidden;margin:0;background:#000;`,
+      sideNavAfterVideoStyle: `position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;background:#000;`,
+      replayTocVideo: (e) => { e.target.currentTime = 0; e.target.play(); },
+      slowVideoRef: (node) => { if (!node) return; node.playbackRate = 0.6; this.forcePlayVideoRef(node); },
+      forcePlayVideoRef: this.forcePlayVideoRef,
+      sideNavBeforeScrollStyle: `position:absolute;inset:0;background-image:url('assets/observation-form-scroll-2.png');background-repeat:no-repeat;background-size:100% auto;background-position:50% 0%;animation:conductScrollForm 50s ease-in-out infinite;`,
+      placeholderCaptionOverlayStyle: `position:absolute;left:12px;bottom:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:400;color:#fff;text-transform:uppercase;letter-spacing:0.02em;background:rgba(0,0,0,0.6);padding:5px 10px;border-radius:6px;`,
+      collapsibleBeforeFrameStyle: `aspect-ratio:16/9;position:relative;overflow:hidden;margin:0;`,
+      collapsibleAfterFrameStyle: `aspect-ratio:16/9;position:relative;overflow:hidden;margin:0;padding:0;background:#000;line-height:0;`,
+      collapsibleAfterVideoStyle: `position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;background:#000;display:block;`,
+      errorAfterFrameStyle: `aspect-ratio:16/9;position:relative;overflow:hidden;margin:0;background:#000;`,
+      errorMockOuterStyle: `border:1px solid ${border};border-radius:16px;margin-top:24px;overflow:hidden;background:${dark ? 'rgba(255,255,255,0.02)' : '#F8FAFC'};`,
+      errorMockPadStyle: `padding:20px;box-sizing:border-box;`,
+      errorBannerStyle: `background:#FEF2F2;border:1px solid #A62220;border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:#A62220;font-family:'Inter',sans-serif;margin-bottom:16px;`,
+      errorMockRowStyle: `display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;`,
+      errorTocCardStyle: `background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:18px 0;width:250px;flex-shrink:0;font-family:'Inter',sans-serif;box-shadow:0 1px 4px rgba(0,0,0,0.06);box-sizing:border-box;`,
+      errorTocHeaderStyle: `display:flex;align-items:center;justify-content:space-between;padding:0 16px 12px;`,
+      errorTocTitleStyle: `font-size:14px;font-weight:700;color:#0F172A;`,
+      errorTocCollapseStyle: `font-size:11px;font-weight:600;color:#066042;display:flex;align-items:center;gap:4px;`,
+      errorTocInputStyle: `height:28px;border:1px solid #CBD5E1;border-radius:6px;margin:0 16px 8px;display:flex;align-items:center;gap:6px;padding:0 10px;color:#94A3B8;font-size:11.5px;box-sizing:border-box;`,
+      errorTocListStyle: `border-top:1px solid #F2F4F7;margin-top:4px;`,
+      errorTocRowStyle: `display:flex;align-items:center;gap:8px;padding:8px 16px;color:#334155;cursor:pointer;`,
+      errorTocRowActiveStyle: `background:#FEF2F2;border-left:3px solid #A62220;display:flex;align-items:flex-start;gap:8px;padding:8px 16px 8px 13px;color:#A62220;cursor:pointer;`,
+      errorTocLabelStyle: `flex:1;font-size:11.5px;font-weight:600;line-height:15px;`,
+      errorTocFooterStyle: `border-top:1px solid #F2F4F7;padding:10px 16px 0;display:flex;justify-content:flex-end;align-items:center;gap:5px;font-size:11.5px;font-weight:500;color:#066042;`,
+      errorRatingCardStyle: `background:#fff;border:1px solid #E2E8F0;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,0.06);flex:1;min-width:260px;font-family:'Inter',sans-serif;box-sizing:border-box;`,
+      errorRatingHeaderStyle: `display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid #E2E8F0;`,
+      errorRatingTitleStyle: `flex:1;font-size:15px;font-weight:600;color:#0F172A;`,
+      errorRatingBadgeStyle: `background:#FEF2F2;color:#A62220;border-radius:999px;padding:4px 11px;font-size:11.5px;font-weight:600;white-space:nowrap;`,
+      errorRatingBodyStyle: `padding:18px 20px;display:flex;flex-direction:column;gap:10px;`,
+      errorRatingLabelStyle: `font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:#64748B;`,
+      errorRatingScaleRowStyle: `display:flex;gap:14px 18px;flex-wrap:wrap;`,
+      errorRatingOptionStyle: `display:flex;align-items:center;gap:8px;`,
+      errorRatingRadioStyle: `width:18px;height:18px;border-radius:50%;border:1px solid #CBD5E1;display:inline-block;flex-shrink:0;`,
+      errorRatingOptionTextStyle: `font-size:13px;color:#334155;`,
+      errorRatingRequiredStyle: `display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:#A62220;`,
+      errorAfterVideoStyle: `position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;background:#000;display:block;`,
+      collapsibleAsteriskStyle1: `position:absolute;left:56.1%;top:38.5%;color:#DC2626;font-size:11px;font-weight:700;font-family:'Inter',sans-serif;pointer-events:none;`,
+      collapsibleAsteriskStyle2: `position:absolute;left:53.6%;top:46.5%;color:#DC2626;font-size:11px;font-weight:700;font-family:'Inter',sans-serif;pointer-events:none;`,
+      collapsibleMockCardStyle: `width:100%;background:#fff;border:1px solid #E2E8F0;border-radius:12px;box-shadow:0 1px 2px rgba(15,23,42,0.04);overflow:hidden;font-family:'Inter',sans-serif;`,
+      collapsibleMockHeaderStyle: `display:flex;align-items:center;gap:14px;padding:18px 20px;border-bottom:1px solid #EEF2F6;`,
+      collapsibleMockChevronOpenStyle: `font-size:16px;color:#475569;width:14px;`,
+      collapsibleMockChevronStyle: `color:#94A3B8;width:18px;flex-shrink:0;display:flex;align-items:center;`,
+      collapsibleMockTitleStyle: `flex:1;font-size:16px;font-weight:600;color:${dark ? '#F4F4F5' : 'rgb(15,23,42)'};`,
+      collapsibleMockBadgeStyle: `font-size:12px;font-weight:500;color:#475569;background:#F1F5F9;border-radius:999px;padding:5px 12px;white-space:nowrap;`,
+      collapsibleMockAsteriskStyle: `color:#DC2626;`,
+      collapsibleMockHeaderChevronStyle: `font-size:18px;color:${dark ? '#94A3B8' : 'rgb(71,85,105)'};display:flex;align-items:center;flex-shrink:0;`,
+      collapsibleMockRowStyle: `display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #F1F5F9;min-width:0;`,
+      collapsibleMockRowStyleLast: `display:flex;align-items:center;gap:14px;padding:14px 20px;min-width:0;`,
+      collapsibleMockQNumStyle: `font-size:13px;font-weight:700;color:${dark ? '#F4F4F5' : '#1E293B'};flex-shrink:0;`,
+      collapsibleMockQTextStyle: `flex:1;min-width:0;font-size:13px;color:${dark ? '#E4E4E7' : '#334155'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;`,
+      collapsibleMockNotRatedStyle: `font-size:12px;color:#94A3B8;background:#F8FAFC;border-radius:999px;padding:4px 12px;white-space:nowrap;`,
+      collapsibleBeforeScrollStyle: `position:absolute;inset:0;background-image:url('assets/observation-form-expanded.png');background-repeat:no-repeat;background-size:100% auto;background-position:50% 0%;animation:conductScrollForm 50s ease-in-out infinite;`,
+      breakpointRowStyle: `display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;`,
+      breakpointColStyle: `display:flex;flex-direction:column;gap:12px;`,
+      userPatternsLabelStyle: `font-size:11px;font-weight:600;letter-spacing:0.08em;color:${muted};text-transform:uppercase;margin:32px 0 12px;`,
+      userPatternsCardStyle: `background:${dark ? 'hsl(0 0% 15%)' : '#fff'};border:1px solid ${border};border-radius:16px;padding:8px 24px;`,
+      userPatternRowStyle: `display:flex;gap:16px;align-items:flex-start;padding:20px 0;`,
+      userPatternDividerStyle: `height:1px;background:${border};`,
+      userPatternIconStyle: `flex-shrink:0;color:${accent};padding-top:2px;`,
+      userPatternBodyStyle: `flex:1;min-width:0;`,
+      userPatternHeaderRowStyle: `display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;`,
+      userPatternNameStyle: `font-size:17px;font-weight:700;color:${text};`,
+      userPatternBadgeStyle: {
+        observers: `font-size:10px;font-weight:400;letter-spacing:0.04em;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;color:${accent};background:${dark ? 'hsl(215 30% 22%)' : '#E5EDFB'};border-radius:999px;padding:3px 9px;`,
+        learners: `font-size:10px;font-weight:400;letter-spacing:0.04em;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;color:${dark ? '#E0A868' : '#B5741C'};background:${dark ? 'hsl(35 30% 20%)' : '#FBEEDD'};border-radius:999px;padding:3px 9px;`,
+      },
+      dividerLineStyle: `width:100%;height:1px;background:${border};margin:-24px 0 32px;`,
+      statsGridStyle: `display:grid;grid-template-columns:1fr 1fr;column-gap:32px;row-gap:32px;margin-top:32px;`,
+      statsGridRef: this.statsGridRef,
+      statDisplay0: `${this.state.counts[0]}%`,
+      statDisplay1: `${this.state.counts[1]}%`,
+      statDisplay2: `${this.state.counts[2]}%`,
+      statDisplay3: `${this.state.counts[3]}%`,
+      bigStatNumStyle: `font-size:40px;font-weight:700;letter-spacing:-0.01em;`,
+      bigStatLabelStyle: `font-size:14px;line-height:20px;letter-spacing:-0.1px;color:${muted};font-family:'Inter',sans-serif;font-weight:500;margin-top:6px;`,
+
+      moreWorkStyle: `display:flex;flex-direction:column;gap:16px;margin-top:-32px;padding-top:40px;border-top:1px solid ${border};`,
+      moreWorkGridStyle: `display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));column-gap:28px;row-gap:36px;margin-top:8px;`,
+      moreWorkCardStyle: `display:flex;flex-direction:column;gap:14px;color:inherit;cursor:pointer;`,
+      moreWorkThumbStyle: `position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#FAFAFA;border:1px solid ${dark ? border : '#EAEAEA'};`,
+      moreWorkMediaStyle: `position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#FAFAFA;transition:transform 0.4s ease;transform:scale(1.12);`,
+      moreWorkMediaPadStyle: `display:block;width:100%;height:100%;object-fit:contain;background:#FAFAFA;padding:24px;box-sizing:border-box;transition:transform 0.4s ease;transform:scale(1.06);`,
+      moreWorkImgStyle: `position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;transition:transform 0.4s ease;transform:scale(0.86);`,
+      moreWorkPillStyle: `display:inline-flex;width:fit-content;font-size:12px;color:${muted};background:${dark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.9)'};border:1px solid ${border};border-radius:999px;padding:4px 10px;margin-bottom:-4px;`,
+      moreWorkTitleStyle: `font-size:17px;font-weight:400;line-height:1.3em;letter-spacing:-0.01em;margin:0;color:${text};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;`,
+      moreWorkArrowStyle: `display:inline-block;font-size:12px;transform:scale(0.85);`,
+
+      footerStyle: `max-width:1080px;margin:0 auto;padding:40px 40px 60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid ${border};`,
+      footerCopyStyle: `font-family:'Helvetica Neue LT Pro','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:11px;line-height:16px;letter-spacing:0.1px;color:#575757;`,
+      footerDividerStyle: `font-family:'Helvetica Neue LT Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:${border};margin:0 2px;`,
+      footerMutedStyle: `font-family:'Helvetica Neue LT Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#c4c4c4;`,
+      footerLinkStyle: `font-family:'Helvetica Neue LT Pro','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:11px;line-height:16px;letter-spacing:0.1px;color:#575757;text-decoration:none;`,
+      baltimoreTime: this.state.baltimoreTime || '',
+    };
+  }
+}
+
+</script>
+</body>
+</html>
